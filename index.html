@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rede Social Passa a Bola</title>
+    <link rel="stylesheet" href="./assets/style.css">
+</head>
+<body>
+    <header>
+        <h1>Rede Social Jogadoras Passa a Bola</h1>
+    </header>
+    <form id="cardForm">
+        <label for="cardName">Nome:</label>
+        <textarea id="CardName" cols="50" placeholder="Insira o nome completo da jogadora"></textarea><br>
+
+        <label for="cardPosition">Posição em Campo:</label>
+        <textarea id="cardPosition" cols="50" placeholder="Insira a posição de campo que a jogadora costuma jogar"></textarea><br>
+
+        <label for="cardClub">Clube:</label>
+        <textarea id="cardClub" cols="50" placeholder="Insira o clube que essa jogadora pertence atualmente"></textarea><br>
+
+        <label for="cardStatistcs">Estatísticas:</label>
+        <textarea id="cardStatistcsGols" cols="50" placeholder="Gols:"></textarea>
+        <textarea id="cardStatistcsAssist" cols="50" placeholder="Assistências:"></textarea>
+        <textarea id="cardStatistcsGames" cols="50" placeholder="Jogos:"></textarea><br>
+
+        <label for="cardPhoto">Foto:</label>
+        <input type="text" id="cardPhoto" placeholder="Insira a URL da foto da jogadora"><br>
+
+        <button type="submit">Postar</button><br>
+    </form>
+
+    <h1>Jogadoras</h1>
+    <div id="cardList"></div>
+
+    <script src="./assets/script.js"/>
+</body>
+</html>
