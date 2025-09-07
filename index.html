@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rede Social Passa a Bola</title>
+    <link rel="stylesheet" href="./assets/style.css">
+    <script src="https://kit.fontawesome.com/c29aaa8596.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header>
+        <h1>Rede Social Jogadoras Passa a Bola</h1>
+    </header>
+    <form id="cardForm">
+        <label for="cardName">Nome:</label>
+        <input type="text" id="cardName" name="cardName" placeholder="Insira o nome completo da jogadora"><br>
+
+        <label for="cardPosition">Posição em Campo:</label>
+        <input type="text" id="cardPosition" name="cardPosition" placeholder="Insira a posição de campo que a jogadora costuma jogar"><br>
+
+        <label for="cardClub">Clube:</label>
+        <input type="text" id="cardClub" name="cardClub" placeholder="Insira o clube que essa jogadora pertence atualmente"><br>
+
+        <label for="cardStatistcs">Estatísticas:</label>
+        <input type="number" id="cardStatistcsGols" name="cardStatistcsGols" placeholder="Gols:">
+        <input type="number" id="cardStatistcsAssist" name="cardStatistcsAssist" placeholder="Assistências:">
+        <input type="number" id="cardStatistcsGames" name="cardStatistcsGames" placeholder="Jogos:"><br>
+
+        <label for="cardPhoto">Foto:</label>
+        <input type="text" id="cardPhoto" name="cardPhoto" placeholder="Insira a URL da foto da jogadora"><br>
+
+        <button type="submit">Postar</button><br>
+    </form>
+
+    <h1>Jogadoras</h1>
+    <div id="cardList"></div>
+
+    <script src="./assets/script.js"></script>
+</body>
+</html>
