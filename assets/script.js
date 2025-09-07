@@ -107,7 +107,6 @@ function displayCards() {
 
 // Criar um novo Card
 function addCard(event) {
-  console.log(event);
   // Impede o envio padrão do formulário
   event.preventDefault();
 
@@ -119,6 +118,11 @@ function addCard(event) {
   const cardStatistcsAssist = document.getElementById('cardStatistcsAssist').value;
   const cardStatistcsGames = document.getElementById('cardStatistcsGames').value;
   const cardPhoto = document.getElementById('cardPhoto').value;
+
+  if (!cardName || !cardPosition || !cardClub || !cardStatistcsGols || !cardStatistcsAssist || !cardStatistcsGames) {
+    alert("Por favor, preencha todos os campos.");
+    return;
+  }
 
   // Novo objeto card
   const card = {
@@ -168,7 +172,7 @@ function editCard(index) {
     const novoPhoto = prompt("Editar foto (URL):", cards[index].foto);
 
     if (novoName !== null) {
-        cards[index].name = novoName;
+        cards[index].nome = novoName;
     }
     if (novoPosition !== null) {
         cards[index].posicao = novoPosition;
