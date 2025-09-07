@@ -90,6 +90,7 @@ function displayCards() {
                   ${card.favorita ? '<i class="fa-solid fa-star"></i>' : '<i class="fa-regular fa-star"></i>'}
               </button>
             </div>
+            <br>
             <h1>${card.nome}</h1>
             <img src="${card.foto}" alt="Foto de ${card.nome}">
             <p><strong>Posição:</strong> ${card.posicao}</p>
@@ -106,7 +107,6 @@ function displayCards() {
 
 // Criar um novo Card
 function addCard(event) {
-  console.log(event);
   // Impede o envio padrão do formulário
   event.preventDefault();
 
@@ -118,6 +118,11 @@ function addCard(event) {
   const cardStatistcsAssist = document.getElementById('cardStatistcsAssist').value;
   const cardStatistcsGames = document.getElementById('cardStatistcsGames').value;
   const cardPhoto = document.getElementById('cardPhoto').value;
+
+  if (!cardName || !cardPosition || !cardClub || !cardStatistcsGols || !cardStatistcsAssist || !cardStatistcsGames) {
+    alert("Por favor, preencha todos os campos.");
+    return;
+  }
 
   // Novo objeto card
   const card = {
@@ -148,7 +153,7 @@ function handleCardListClick(event) {
     const index = clickedElement.dataset.index;
 
     if (action === "edit") {
-        // editCard(index);
+        editCard(index);
     } else if (action === "delete") {
         deleteCard(index);
     } else if (action === "toggleFavorite") {
@@ -158,13 +163,39 @@ function handleCardListClick(event) {
 
 // Atualiza um Card existente
 function editCard(index) {
-    const novoNome = prompt("Editar nome:", cards[index].text);
+    const novoName = prompt("Editar nome:", cards[index].nome);
+    const novoPosition = prompt("Editar posição:", cards[index].posicao);
+    const novoClub = prompt("Editar clube:", cards[index].clube);
+    const novoGols = prompt("Editar gols:", cards[index].gols);
+    const novoAssist = prompt("Editar assistências:", cards[index].assistencias);
+    const novoGames = prompt("Editar jogos:", cards[index].jogos);
+    const novoPhoto = prompt("Editar foto (URL):", cards[index].foto);
 
-    if (novoTexto !== null) {
-        posts[index].text = novoTexto;
-        savePosts();
-        displayPosts();
+    if (novoName !== null) {
+        cards[index].nome = novoName;
     }
+    if (novoPosition !== null) {
+        cards[index].posicao = novoPosition;
+    }
+    if (novoClub !== null) {
+        cards[index].clube = novoClub;
+    }
+    if (novoGols !== null) {
+        cards[index].gols = novoGols;
+    }
+    if (novoAssist !== null) {
+        cards[index].assistencias = novoAssist;
+    }
+    if (novoGames !== null) {
+        cards[index].jogos = novoGames;
+    }
+    if (novoPhoto !== null) {
+        cards[index].foto = novoPhoto;
+    }
+
+    saveCards(); // Salva a atualização no LocalStorage
+    displayCards(); // Atualiza a exibição dos cards
+
     alert("Card editado com sucesso!");
 }
 // Deleta um Card existente
