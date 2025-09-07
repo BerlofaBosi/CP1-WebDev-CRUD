@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rede Social Passa a Bola</title>
     <link rel="stylesheet" href="./assets/style.css">
+    <script src="https://kit.fontawesome.com/c29aaa8596.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <header>
@@ -12,21 +13,21 @@
     </header>
     <form id="cardForm">
         <label for="cardName">Nome:</label>
-        <textarea id="CardName" cols="50" placeholder="Insira o nome completo da jogadora"></textarea><br>
+        <input type="text" id="cardName" name="cardName" placeholder="Insira o nome completo da jogadora"><br>
 
         <label for="cardPosition">Posição em Campo:</label>
-        <textarea id="cardPosition" cols="50" placeholder="Insira a posição de campo que a jogadora costuma jogar"></textarea><br>
+        <input type="text" id="cardPosition" name="cardPosition" placeholder="Insira a posição de campo que a jogadora costuma jogar"><br>
 
         <label for="cardClub">Clube:</label>
-        <textarea id="cardClub" cols="50" placeholder="Insira o clube que essa jogadora pertence atualmente"></textarea><br>
+        <input type="text" id="cardClub" name="cardClub" placeholder="Insira o clube que essa jogadora pertence atualmente"><br>
 
         <label for="cardStatistcs">Estatísticas:</label>
-        <textarea id="cardStatistcsGols" cols="50" placeholder="Gols:"></textarea>
-        <textarea id="cardStatistcsAssist" cols="50" placeholder="Assistências:"></textarea>
-        <textarea id="cardStatistcsGames" cols="50" placeholder="Jogos:"></textarea><br>
+        <input type="number" id="cardStatistcsGols" name="cardStatistcsGols" placeholder="Gols:">
+        <input type="number" id="cardStatistcsAssist" name="cardStatistcsAssist" placeholder="Assistências:">
+        <input type="number" id="cardStatistcsGames" name="cardStatistcsGames" placeholder="Jogos:"><br>
 
         <label for="cardPhoto">Foto:</label>
-        <input type="text" id="cardPhoto" placeholder="Insira a URL da foto da jogadora"><br>
+        <input type="text" id="cardPhoto" name="cardPhoto" placeholder="Insira a URL da foto da jogadora"><br>
 
         <button type="submit">Postar</button><br>
     </form>
@@ -34,6 +35,6 @@
     <h1>Jogadoras</h1>
     <div id="cardList"></div>
 
-    <script src="./assets/script.js"/>
+    <script src="./assets/script.js"></script>
 </body>
 </html>
