@@ -56,9 +56,11 @@ window.onload = function () {
   loadCards();
   saveCards();
   displayCards();
+  setFilterOptions(); // Atualiza as opções do filtro
 
   document.getElementById('cardForm').addEventListener('submit', addCard);
   document.getElementById('cardList').addEventListener('click', handleCardListClick);
+  document.getElementById('ordenarTime').addEventListener('change', ordenarTime);
 };
 
 // Função para salvar no LocalStorage
@@ -74,20 +76,12 @@ function loadCards() {
 }
 
 // Exibição dos Cards
-function displayCards() {
+function displayCards(clube = null) {
   const cardList = document.getElementById('cardList');
-  const ordenarTime = document.getElementById('ordenarTime');
 
   cardList.innerHTML = '';
-  ordenarTime.innerHTML = '<option value="" disabled selected>Selecione</option>';
-
-  let ultimoClube = [];
 
   cards.forEach((card, index) => {
-    const filtroOption = document.createElement('option');
-    filtroOption.value = card.clube;
-    filtroOption.textContent = card.clube;
-
     const cardElement = document.createElement('div');
     cardElement.classList.add('card');
 
@@ -108,15 +102,11 @@ function displayCards() {
             <p><strong>Assistências:</strong> ${card.assistencias}</p>
             <p><strong>Jogos:</strong> ${card.jogos}</p>
             <hr style="margin:30px;">
-        `;
-
-    cardList.appendChild(cardElement);
-
-    if (ultimoClube.indexOf(card.clube) === -1) {
-      ordenarTime.appendChild(filtroOption);
-      ultimoClube.push(card.clube);
+      `;
+    if (!clube || card.clube === clube) {
+      cardList.appendChild(cardElement);
     }
-  });
+    });
 }
 
 // Criar um novo Card
@@ -155,6 +145,7 @@ function addCard(event) {
 
   document.getElementById('cardForm').reset(); // Reseta o formulário
   displayCards(); // Atualiza a exibição dos cards
+  setFilterOptions(); // Atualiza as opções do filtro
   alert("Card adicionado com sucesso!");
 }
 
@@ -185,30 +176,19 @@ function editCard(index) {
     const novoGames = prompt("Editar jogos:", cards[index].jogos);
     const novoPhoto = prompt("Editar foto (URL):", cards[index].foto);
 
-    if (novoName !== null) {
-        cards[index].nome = novoName;
-    }
-    if (novoPosition !== null) {
-        cards[index].posicao = novoPosition;
-    }
-    if (novoClub !== null) {
-        cards[index].clube = novoClub;
-    }
-    if (novoGols !== null) {
-        cards[index].gols = novoGols;
-    }
-    if (novoAssist !== null) {
-        cards[index].assistencias = novoAssist;
-    }
-    if (novoGames !== null) {
-        cards[index].jogos = novoGames;
-    }
-    if (novoPhoto !== null) {
-        cards[index].foto = novoPhoto;
+    if (novoName !== null && novoPosition !== null && novoClub !== null && novoGols !== null && novoAssist !== null && novoGames !== null && novoPhoto !== null) {
+      cards[index].nome = novoName;
+      cards[index].posicao = novoPosition;
+      cards[index].clube = novoClub;
+      cards[index].gols = novoGols;
+      cards[index].assistencias = novoAssist;
+      cards[index].jogos = novoGames;
+      cards[index].foto = novoPhoto;
     }
 
     saveCards(); // Salva a atualização no LocalStorage
     displayCards(); // Atualiza a exibição dos cards
+    setFilterOptions(); // Atualiza as opções do filtro
 
     alert("Card editado com sucesso!");
 }
@@ -219,6 +199,7 @@ function deleteCard(index) {
         cards.splice(index, 1); // Remove o card do array
         saveCards(); // Salva a atualização no LocalStorage
         displayCards(); // Atualiza a exibição dos cards
+        setFilterOptions(); // Atualiza as opções do filtro
         alert("Card excluído com sucesso!");
     }
 }
@@ -228,4 +209,35 @@ function cardFavorite(index) {
     cards[index].favorita = !cards[index].favorita; // Alterna o status de favorito
     saveCards(); // Salva a atualização no LocalStorage
     displayCards(); // Atualiza a exibição dos cards
+}
+
+function setFilterOptions() {
+  const ordenarTime = document.getElementById('ordenarTime');
+  ordenarTime.innerHTML = '<option value="">Todos</option>';
+
+  let ultimoClube = [];
+
+  cards.forEach((card) => {
+    const filtroOption = document.createElement('option');
+    filtroOption.value = card.clube;
+    filtroOption.textContent = card.clube;
+
+    if (ultimoClube.indexOf(card.clube) === -1) {
+      ordenarTime.appendChild(filtroOption);
+      ultimoClube.push(card.clube);
+    }
+  });
+}
+
+function ordenarTime(event) {
+    const ordenarTime = document.getElementById('ordenarTime');
+    const selectedClub = ordenarTime.value;
+
+    if (selectedClub) {
+        console.log("Clube selecionado:", selectedClub);
+        displayCards(selectedClub);
+    } else {
+        console.log("Nenhum clube selecionado.");
+        displayCards();
+    }
 }
