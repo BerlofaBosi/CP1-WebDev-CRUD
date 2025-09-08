@@ -76,9 +76,18 @@ function loadCards() {
 // Exibição dos Cards
 function displayCards() {
   const cardList = document.getElementById('cardList');
+  const ordenarTime = document.getElementById('ordenarTime');
+
   cardList.innerHTML = '';
+  ordenarTime.innerHTML = '<option value="" disabled selected>Selecione</option>';
+
+  let ultimoClube = [];
 
   cards.forEach((card, index) => {
+    const filtroOption = document.createElement('option');
+    filtroOption.value = card.clube;
+    filtroOption.textContent = card.clube;
+
     const cardElement = document.createElement('div');
     cardElement.classList.add('card');
 
@@ -102,6 +111,11 @@ function displayCards() {
         `;
 
     cardList.appendChild(cardElement);
+
+    if (ultimoClube.indexOf(card.clube) === -1) {
+      ordenarTime.appendChild(filtroOption);
+      ultimoClube.push(card.clube);
+    }
   });
 }
 
